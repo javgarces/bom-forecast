@@ -112,6 +112,8 @@ forecast_prints = list()
 for forecast in location_dict[LOCATION]:
     date = forecast['@start-time-local'].split('T')[0]
     forecast_items = list()
+    if type(forecast['element']) is not list:
+        continue
     for element in forecast['element']:
         if element['@type'] == 'air_temperature_minimum':
             forecast_items.append("Min: {} C".format(element['#text']))
@@ -123,6 +125,4 @@ print("\nForecast for {}, {}:\n".format(LOCATION, STATE))
 
 for line in forecast_prints:
     print(line)
-    
-
 
